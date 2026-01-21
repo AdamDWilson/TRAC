@@ -150,8 +150,11 @@ function showSurveyView(template, formConfig) {
 
     // Track validation state for generate button
     function updateGenerateButton() {
-        const isValid = currentSurvey.validate(false, false);
-        generateButton.disabled = !isValid;
+        // Check if all visible required questions are answered without calling validate()
+        // which can interfere with focus
+        const questions = currentSurvey.getAllQuestions(true); // visibleOnly=true
+        const allAnswered = questions.every(q => !q.isRequired || !q.isEmpty());
+        generateButton.disabled = !allAnswered;
     }
 
     currentSurvey.onValueChanged.add(updateGenerateButton);
