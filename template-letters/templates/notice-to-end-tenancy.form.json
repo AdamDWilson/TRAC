@@ -1,0 +1,142 @@
+{
+    "elements": [
+        {
+            "type": "panel",
+            "name": "tenantPanel",
+            "title": "Your Information",
+            "elements": [
+                {
+                    "name": "tenant_name",
+                    "type": "text",
+                    "title": "Your Full Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "tenant_address_full",
+                    "type": "comment",
+                    "title": "Rental Unit Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "landlordPanel",
+            "title": "Landlord Information",
+            "elements": [
+                {
+                    "name": "landlord_name",
+                    "type": "text",
+                    "title": "Landlord's Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "landlord_address_full",
+                    "type": "comment",
+                    "title": "Landlord's Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "tenancyPanel",
+            "title": "Tenancy Details",
+            "elements": [
+                {
+                    "name": "tenancy_start_date",
+                    "type": "text",
+                    "inputType": "date",
+                    "title": "When did your tenancy begin?",
+                    "isRequired": true
+                },
+                {
+                    "name": "tenancy_end_date",
+                    "type": "text",
+                    "inputType": "date",
+                    "title": "Desired last day of tenancy",
+                    "description": "Must be at least 1 month from notice and the day before rent is due",
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "depositPanel",
+            "title": "Security Deposit",
+            "elements": [
+                {
+                    "name": "has_security_deposit",
+                    "type": "boolean",
+                    "title": "Did you pay a security deposit?",
+                    "defaultValue": false
+                },
+                {
+                    "name": "deposit_amount",
+                    "type": "text",
+                    "inputType": "number",
+                    "title": "Deposit amount ($)",
+                    "visibleIf": "{has_security_deposit} = true",
+                    "isRequired": true
+                },
+                {
+                    "name": "deposit_calculation_supported",
+                    "type": "expression",
+                    "expression": "year({tenancy_start_date}) >= 2023",
+                    "visible": false
+                },
+                {
+                    "name": "manual_deposit_return_amount",
+                    "type": "text",
+                    "inputType": "number",
+                    "title": "Enter calculated return amount ($)",
+                    "description": "Your tenancy started before 2023. Please use the RTB calculator to determine the return amount: https://www.housing.gov.bc.ca/rtb/WebTools/InterestOnDepositCalculator.html",
+                    "visibleIf": "{has_security_deposit} = true and {deposit_calculation_supported} = false",
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "returnPanel",
+            "title": "Deposit Return Method",
+            "visibleIf": "{has_security_deposit} = true",
+            "elements": [
+                {
+                    "name": "deposit_return_method",
+                    "type": "radiogroup",
+                    "title": "How should the deposit be returned?",
+                    "isRequired": true,
+                    "choices": [
+                        "Mail",
+                        "E-Transfer"
+                    ]
+                },
+                {
+                    "name": "tenant_forwarding_address_full",
+                    "type": "comment",
+                    "title": "Forwarding mailing address",
+                    "description": "Where should the cheque be mailed?",
+                    "rows": 3,
+                    "visibleIf": "{deposit_return_method} = 'Mail'",
+                    "isRequired": true
+                },
+                {
+                    "name": "tenant_forwarding_email",
+                    "type": "text",
+                    "inputType": "email",
+                    "title": "Email for e-transfer",
+                    "visibleIf": "{deposit_return_method} = 'E-Transfer'",
+                    "isRequired": true
+                }
+            ]
+        }
+    ],
+    "showNavigationButtons": "none",
+    "showQuestionNumbers": "off",
+    "completeText": "Generate Letter"
+}

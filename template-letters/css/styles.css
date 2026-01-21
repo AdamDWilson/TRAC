@@ -1,0 +1,310 @@
+/* CSS Reset and Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: 140px; /* Account for sticky header + field label when tabbing */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* Views */
+.view {
+    min-height: 100vh;
+}
+
+.view.hidden {
+    display: none;
+}
+
+/* Header */
+.header {
+    background: #fff;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #0066cc;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+/* Template Grid (Directory View) */
+.template-grid {
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.template-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.template-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.template-card h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0066cc;
+}
+
+.template-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Survey Container */
+.survey-container {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* SurveyJS Overrides for Mobile */
+.sd-root-modern {
+    --sd-base-padding: 1rem;
+}
+
+.sd-element--with-frame {
+    padding: 1rem !important;
+}
+
+.sd-question__title {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+.sd-input {
+    font-size: 16px !important; /* Prevents iOS zoom */
+}
+
+.sd-text__content textarea {
+    font-size: 16px !important;
+}
+
+.sd-panel__title {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+}
+
+/* Hide SurveyJS default complete button - we use our own */
+.sd-navigation__complete-btn {
+    display: none !important;
+}
+
+/* Generate Button */
+.generate-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #0066cc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s;
+}
+
+.generate-button:hover {
+    background: #0052a3;
+}
+
+.generate-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Letter Container (Output View) */
+.letter-container {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.letter-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    flex: 1;
+    min-width: 140px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.action-button:not(.primary) {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.action-button:not(.primary):hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.action-button.primary {
+    background: #0066cc;
+    color: #fff;
+    border: none;
+}
+
+.action-button.primary:hover {
+    background: #0052a3;
+}
+
+.letter-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+}
+
+.letter-content p {
+    margin: 0 0 1rem;
+}
+
+.letter-content ul {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+}
+
+.letter-content li {
+    margin-bottom: 0.25rem;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.toast.visible {
+    opacity: 1;
+}
+
+.toast.hidden {
+    display: none;
+}
+
+/* Tablet Breakpoint */
+@media (min-width: 768px) {
+    .header {
+        padding: 1.5rem 2rem;
+    }
+
+    .header h1 {
+        font-size: 1.75rem;
+    }
+
+    .template-grid {
+        padding: 1.5rem 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .survey-container,
+    .letter-container {
+        padding: 1.5rem 2rem;
+    }
+
+    .letter-content {
+        padding: 2rem;
+    }
+}
+
+/* Desktop Breakpoint */
+@media (min-width: 1024px) {
+    .header {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        border-bottom: none;
+    }
+
+    .template-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 2rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .template-card {
+        padding: 1.5rem;
+    }
+
+    .template-card h2 {
+        font-size: 1.2rem;
+    }
+}

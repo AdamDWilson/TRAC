@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Letters</title>
+
+    <!-- SurveyJS CSS -->
+    <link href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
+
+    <!-- Local styles -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Directory View -->
+    <div id="directoryView" class="view">
+        <header class="header">
+            <h1>Template Letters</h1>
+            <p class="subtitle">Generate legal letters for common situations</p>
+        </header>
+        <main class="template-grid" id="templateGrid">
+            <!-- Template cards populated by JS -->
+        </main>
+    </div>
+
+    <!-- Survey View -->
+    <div id="surveyView" class="view hidden">
+        <header class="header">
+            <button class="back-button" id="backButton">&larr; Back</button>
+            <h1 id="surveyTitle">Template</h1>
+        </header>
+        <main class="survey-container">
+            <div id="surveyElement"></div>
+            <button class="generate-button" id="generateButton">Generate Letter</button>
+        </main>
+    </div>
+
+    <!-- Letter View -->
+    <div id="letterView" class="view hidden">
+        <header class="header">
+            <h1 id="letterTitle">Generated Letter</h1>
+        </header>
+        <main class="letter-container">
+            <div class="letter-actions">
+                <button class="action-button" id="editButton">Edit Answers</button>
+                <button class="action-button primary" id="copyButton">Copy to Clipboard</button>
+            </div>
+            <div class="letter-content" id="letterContent">
+                <!-- Rendered letter appears here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast hidden" id="toast"></div>
+
+    <!-- CDN Scripts -->
+    <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
+    <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Local Scripts -->
+    <script src="templates/index.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
