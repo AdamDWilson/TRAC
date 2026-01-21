@@ -138,26 +138,20 @@ function showDirectoryView() {
  * Show survey view
  */
 function showSurveyView(template, formConfig) {
-    console.log('showSurveyView called');
     surveyTitle.textContent = template.name;
 
     // Create SurveyJS model
-    console.log('Creating Survey.Model...');
     currentSurvey = new Survey.Model(formConfig);
-    console.log('Survey.Model created:', currentSurvey);
 
     // Restore previous data if editing
     if (currentFormData) {
-        console.log('Restoring form data:', currentFormData);
         currentSurvey.data = currentFormData;
     }
 
     // Render survey to DOM - create fresh container to avoid SurveyJS re-render issues
-    console.log('Rendering survey...');
     surveyElement.innerHTML = '<div id="surveyContainer"></div>';
     const container = document.getElementById('surveyContainer');
     currentSurvey.render(container);
-    console.log('Survey rendered, container contents:', container.innerHTML.substring(0, 200));
 
     // Set inputmode="decimal" on number inputs for iOS numeric keyboard
     function setNumericInputModes() {
@@ -169,12 +163,9 @@ function showSurveyView(template, formConfig) {
     currentSurvey.onAfterRenderQuestion.add(setNumericInputModes);
 
     // Show survey, hide others
-    console.log('Toggling view visibility...');
     directoryView.classList.add('hidden');
     surveyView.classList.remove('hidden');
     letterView.classList.add('hidden');
-    console.log('surveyView hidden?', surveyView.classList.contains('hidden'));
-    console.log('letterView hidden?', letterView.classList.contains('hidden'));
 }
 
 /**
@@ -231,21 +222,10 @@ function handleBack() {
  * Handle edit button click
  */
 function handleEdit() {
-    console.log('handleEdit called, currentTemplate:', currentTemplate);
-    console.log('currentFormData:', currentFormData);
-    // Reload form config and re-show survey with existing data
     fetch(`templates/${currentTemplate.id}.form.json`)
-        .then(response => {
-            console.log('fetch response:', response);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(formConfig => {
-            console.log('formConfig loaded:', formConfig);
-            try {
-                showSurveyView(currentTemplate, formConfig);
-            } catch (e) {
-                console.error('Error in showSurveyView:', e);
-            }
+            showSurveyView(currentTemplate, formConfig);
         })
         .catch(error => {
             console.error('Error loading form config:', error);
