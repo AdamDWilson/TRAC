@@ -79,7 +79,6 @@
                     "name": "deposit_amount",
                     "type": "text",
                     "inputType": "number",
-                    "inputMode": "decimal",
                     "title": "Deposit amount ($)",
                     "visibleIf": "{has_security_deposit} = true",
                     "isRequired": true
@@ -94,7 +93,6 @@
                     "name": "manual_deposit_return_amount",
                     "type": "text",
                     "inputType": "number",
-                    "inputMode": "decimal",
                     "title": "Enter calculated return amount ($)",
                     "description": "Your tenancy started before 2023. Please use the RTB calculator to determine the return amount: https://www.housing.gov.bc.ca/rtb/WebTools/InterestOnDepositCalculator.html",
                     "visibleIf": "{has_security_deposit} = true and {deposit_calculation_supported} = false",

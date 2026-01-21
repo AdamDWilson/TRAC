@@ -150,7 +150,7 @@ function showSurveyView(template, formConfig) {
 
     // Track validation state for generate button
     function updateGenerateButton() {
-        const isValid = currentSurvey.validate(false, true);
+        const isValid = currentSurvey.validate(false, false);
         generateButton.disabled = !isValid;
     }
 
@@ -169,6 +169,15 @@ function showSurveyView(template, formConfig) {
         // Small delay to let SurveyJS update its internal state
         setTimeout(updateGenerateButton, 0);
     });
+
+    // Set inputmode="decimal" on number inputs for iOS numeric keyboard
+    function setNumericInputModes() {
+        surveyElement.querySelectorAll('input[type="number"]').forEach(input => {
+            input.setAttribute('inputmode', 'decimal');
+        });
+    }
+    setNumericInputModes();
+    currentSurvey.onAfterRenderQuestion.add(setNumericInputModes);
 
     // Show survey, hide others
     directoryView.classList.add('hidden');
