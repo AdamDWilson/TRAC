@@ -138,19 +138,25 @@ function showDirectoryView() {
  * Show survey view
  */
 function showSurveyView(template, formConfig) {
+    console.log('showSurveyView called');
     surveyTitle.textContent = template.name;
 
     // Create SurveyJS model
+    console.log('Creating Survey.Model...');
     currentSurvey = new Survey.Model(formConfig);
+    console.log('Survey.Model created:', currentSurvey);
 
     // Restore previous data if editing
     if (currentFormData) {
+        console.log('Restoring form data:', currentFormData);
         currentSurvey.data = currentFormData;
     }
 
     // Render survey to DOM
+    console.log('Rendering survey to element:', surveyElement);
     surveyElement.innerHTML = '';
     currentSurvey.render(surveyElement);
+    console.log('Survey rendered, element contents:', surveyElement.innerHTML.substring(0, 200));
 
     // Set inputmode="decimal" on number inputs for iOS numeric keyboard
     function setNumericInputModes() {
@@ -162,9 +168,12 @@ function showSurveyView(template, formConfig) {
     currentSurvey.onAfterRenderQuestion.add(setNumericInputModes);
 
     // Show survey, hide others
+    console.log('Toggling view visibility...');
     directoryView.classList.add('hidden');
     surveyView.classList.remove('hidden');
     letterView.classList.add('hidden');
+    console.log('surveyView hidden?', surveyView.classList.contains('hidden'));
+    console.log('letterView hidden?', letterView.classList.contains('hidden'));
 }
 
 /**
