@@ -164,6 +164,12 @@ function showSurveyView(template, formConfig) {
     surveyElement.innerHTML = '';
     currentSurvey.render(surveyElement);
 
+    // Add real-time input validation (onValueChanged only fires on blur)
+    surveyElement.addEventListener('input', () => {
+        // Small delay to let SurveyJS update its internal state
+        setTimeout(updateGenerateButton, 0);
+    });
+
     // Show survey, hide others
     directoryView.classList.add('hidden');
     surveyView.classList.remove('hidden');
@@ -181,6 +187,9 @@ function showLetterView(html) {
     directoryView.classList.add('hidden');
     surveyView.classList.add('hidden');
     letterView.classList.remove('hidden');
+
+    // Scroll to top of page
+    window.scrollTo(0, 0);
 }
 
 /**
@@ -221,10 +230,7 @@ function handleBack() {
  * Handle edit button click
  */
 function handleEdit() {
-    // Re-show survey with existing data
-    showSurveyView(currentTemplate, null);
-
-    // Need to reload form config to re-initialize survey properly
+    // Reload form config and re-show survey with existing data
     fetch(`templates/${currentTemplate.id}.form.json`)
         .then(response => response.json())
         .then(formConfig => {
