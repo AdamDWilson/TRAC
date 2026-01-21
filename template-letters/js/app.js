@@ -141,6 +141,13 @@ function showSurveyView(template, formConfig) {
     console.log('showSurveyView called');
     surveyTitle.textContent = template.name;
 
+    // Dispose old survey if exists
+    if (currentSurvey) {
+        console.log('Disposing old survey...');
+        if (currentSurvey.dispose) currentSurvey.dispose();
+        currentSurvey = null;
+    }
+
     // Create SurveyJS model
     console.log('Creating Survey.Model...');
     currentSurvey = new Survey.Model(formConfig);
