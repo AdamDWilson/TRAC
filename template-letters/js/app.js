@@ -221,11 +221,21 @@ function handleBack() {
  * Handle edit button click
  */
 function handleEdit() {
+    console.log('handleEdit called, currentTemplate:', currentTemplate);
+    console.log('currentFormData:', currentFormData);
     // Reload form config and re-show survey with existing data
     fetch(`templates/${currentTemplate.id}.form.json`)
-        .then(response => response.json())
+        .then(response => {
+            console.log('fetch response:', response);
+            return response.json();
+        })
         .then(formConfig => {
+            console.log('formConfig loaded:', formConfig);
             showSurveyView(currentTemplate, formConfig);
+        })
+        .catch(error => {
+            console.error('Error loading form config:', error);
+            showToast('Error loading form');
         });
 }
 
