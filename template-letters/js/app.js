@@ -240,7 +240,11 @@ function handleEdit() {
         })
         .then(formConfig => {
             console.log('formConfig loaded:', formConfig);
-            showSurveyView(currentTemplate, formConfig);
+            try {
+                showSurveyView(currentTemplate, formConfig);
+            } catch (e) {
+                console.error('Error in showSurveyView:', e);
+            }
         })
         .catch(error => {
             console.error('Error loading form config:', error);
