@@ -159,11 +159,12 @@ function showSurveyView(template, formConfig) {
         currentSurvey.data = currentFormData;
     }
 
-    // Render survey to DOM
-    console.log('Rendering survey to element:', surveyElement);
-    surveyElement.innerHTML = '';
-    currentSurvey.render(surveyElement);
-    console.log('Survey rendered, element contents:', surveyElement.innerHTML.substring(0, 200));
+    // Render survey to DOM - create fresh container to avoid SurveyJS re-render issues
+    console.log('Rendering survey...');
+    surveyElement.innerHTML = '<div id="surveyContainer"></div>';
+    const container = document.getElementById('surveyContainer');
+    currentSurvey.render(container);
+    console.log('Survey rendered, container contents:', container.innerHTML.substring(0, 200));
 
     // Set inputmode="decimal" on number inputs for iOS numeric keyboard
     function setNumericInputModes() {
