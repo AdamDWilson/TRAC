@@ -13,10 +13,9 @@
                 },
                 {
                     "name": "tenant_address_full",
-                    "type": "comment",
+                    "type": "text",
                     "title": "Rental Unit Address",
-                    "description": "Include street address, city, province, and postal code",
-                    "rows": 3,
+                    "description": "Start typing to search for an address",
                     "isRequired": true
                 }
             ]
@@ -34,10 +33,9 @@
                 },
                 {
                     "name": "landlord_address_full",
-                    "type": "comment",
+                    "type": "text",
                     "title": "Landlord's Address",
-                    "description": "Include street address, city, province, and postal code",
-                    "rows": 3,
+                    "description": "Start typing to search for an address",
                     "isRequired": true
                 }
             ]
@@ -118,10 +116,9 @@
                 },
                 {
                     "name": "tenant_forwarding_address_full",
-                    "type": "comment",
+                    "type": "text",
                     "title": "Forwarding mailing address",
-                    "description": "Where should the cheque be mailed?",
-                    "rows": 3,
+                    "description": "Start typing to search for an address",
                     "visibleIf": "{deposit_return_method} = 'Mail'",
                     "isRequired": true
                 },

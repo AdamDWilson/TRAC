@@ -55,6 +55,18 @@
     <!-- Toast notification -->
     <div class="toast hidden" id="toast"></div>
 
+    <!-- Google Maps Places API -->
+    <script>
+        var googleMapsReady = false;
+        function onGoogleMapsLoaded() {
+            googleMapsReady = true;
+            if (typeof initAddressAutocomplete === 'function') {
+                initAddressAutocomplete();
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGS7v9fdetsSGQyjE4jHQ_6ykpH7JgwDo&libraries=places&callback=onGoogleMapsLoaded" async defer></script>
+
     <!-- CDN Scripts -->
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
