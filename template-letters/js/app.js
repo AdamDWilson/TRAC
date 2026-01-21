@@ -148,30 +148,9 @@ function showSurveyView(template, formConfig) {
         currentSurvey.data = currentFormData;
     }
 
-    // Track validation state for generate button
-    function updateGenerateButton() {
-        // Check if all visible required questions are answered without calling validate()
-        // which can interfere with focus
-        const questions = currentSurvey.getAllQuestions(true); // visibleOnly=true
-        const allAnswered = questions.every(q => !q.isRequired || !q.isEmpty());
-        generateButton.disabled = !allAnswered;
-    }
-
-    currentSurvey.onValueChanged.add(updateGenerateButton);
-    currentSurvey.onCurrentPageChanged.add(updateGenerateButton);
-
-    // Initial validation check
-    updateGenerateButton();
-
     // Render survey to DOM
     surveyElement.innerHTML = '';
     currentSurvey.render(surveyElement);
-
-    // Add real-time input validation (onValueChanged only fires on blur)
-    surveyElement.addEventListener('input', () => {
-        // Small delay to let SurveyJS update its internal state
-        setTimeout(updateGenerateButton, 0);
-    });
 
     // Set inputmode="decimal" on number inputs for iOS numeric keyboard
     function setNumericInputModes() {
