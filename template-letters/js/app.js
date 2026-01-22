@@ -4,6 +4,7 @@ let currentSurvey = null;
 let currentTemplate = null;
 let currentLetterTemplate = null;
 let currentFormData = null;
+let navigatedFromDirectory = false;
 
 // DOM Elements
 const directoryView = document.getElementById('directoryView');
@@ -113,8 +114,10 @@ function setupEventListeners() {
         const params = new URLSearchParams(window.location.search);
         const templateId = params.get('template');
         if (templateId) {
+            navigatedFromDirectory = true; // User went back/forward, so there's history
             loadTemplate(templateId);
         } else {
+            navigatedFromDirectory = false;
             showDirectoryView();
         }
     });
@@ -181,6 +184,7 @@ function showDirectoryView() {
         `;
         card.addEventListener('click', (e) => {
             e.preventDefault();
+            navigatedFromDirectory = true;
             history.pushState({}, '', `?template=${template.id}`);
             loadTemplate(template.id);
         });
@@ -198,6 +202,9 @@ function showDirectoryView() {
  */
 function showSurveyView(template, formConfig) {
     surveyTitle.textContent = template.name;
+
+    // Only show back button if user navigated from directory
+    backButton.style.display = navigatedFromDirectory ? '' : 'none';
 
     // Create SurveyJS model
     currentSurvey = new Survey.Model(formConfig);
@@ -281,6 +288,7 @@ function handleGenerate() {
  */
 function handleBack() {
     currentFormData = null;
+    navigatedFromDirectory = false;
     history.pushState({}, '', window.location.pathname);
     showDirectoryView();
 }

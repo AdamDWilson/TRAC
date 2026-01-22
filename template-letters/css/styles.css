@@ -102,18 +102,30 @@ body {
 
 /* Survey Container */
 .survey-container {
-    padding: 1rem;
+    padding: 0.5rem;
     max-width: 800px;
     margin: 0 auto;
 }
 
 /* SurveyJS Overrides for Mobile */
 .sd-root-modern {
-    --sd-base-padding: 1rem;
+    --sd-base-padding: 0.5rem;
+    --sd-base-vertical-padding: 0.75rem;
+}
+
+.sd-body.sd-body--static {
+    padding: 0 !important;
 }
 
 .sd-element--with-frame {
-    padding: 1rem !important;
+    padding: 0.75rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 8px;
+}
+
+.sd-page {
+    padding: 0 !important;
 }
 
 .sd-question__title {
