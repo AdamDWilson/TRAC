@@ -175,6 +175,10 @@ function showSurveyView(template, formConfig) {
     directoryView.classList.add('hidden');
     surveyView.classList.remove('hidden');
     letterView.classList.add('hidden');
+
+    gtag('event', 'letter_start', {
+        'template': template.id
+    });
 }
 
 /**
@@ -201,6 +205,13 @@ function handleGenerate() {
 
     // Validate
     if (!currentSurvey.validate()) {
+        const errorFields = currentSurvey.getAllQuestions()
+            .filter(q => q.errors && q.errors.length > 0)
+            .map(q => q.name);
+        gtag('event', 'letter_error', {
+            'template': currentTemplate.id,
+            'error_fields': errorFields.join(',')
+        });
         showToast('Please fill in all required fields');
         return;
     }
@@ -216,6 +227,10 @@ function handleGenerate() {
 
     // Show letter
     showLetterView(html);
+
+    gtag('event', 'letter_generate', {
+        'template': currentTemplate.id
+    });
 }
 
 /**
@@ -254,6 +269,10 @@ async function handleCopy() {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             await navigator.clipboard.writeText(plainText);
             showToast('Copied to clipboard!');
+            gtag('event', 'letter_action', {
+                'method': 'clipboard',
+                'template': currentTemplate.id
+            });
         } else {
             // Fallback for older browsers
             fallbackCopy(plainText);
@@ -272,6 +291,10 @@ function handleEmail() {
     const subject = encodeURIComponent(currentTemplate.name);
     // Use %0D%0A for line breaks (CRLF) which works better with email clients like Gmail
     const body = encodeURIComponent(plainText).replace(/%0A/g, '%0D%0A');
+    gtag('event', 'letter_action', {
+        'method': 'email',
+        'template': currentTemplate.id
+    });
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
@@ -289,6 +312,10 @@ function fallbackCopy(text) {
     try {
         document.execCommand('copy');
         showToast('Copied to clipboard!');
+        gtag('event', 'letter_action', {
+            'method': 'clipboard',
+            'template': currentTemplate.id
+        });
     } catch (error) {
         showToast('Failed to copy');
     }
