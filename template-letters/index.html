@@ -15,8 +15,8 @@
     <!-- Directory View -->
     <div id="directoryView" class="view">
         <header class="header">
-            <h1>Template Letters</h1>
-            <p class="subtitle">Generate legal letters for common situations</p>
+            <h1>Template Letter Generator Tool</h1>
+            <p class="subtitle">Communicate with your landlord about common situations.  Use this tool to generate a letter you can edit with details about your situation and send.</p>
         </header>
         <main class="template-grid" id="templateGrid">
             <!-- Template cards populated by JS -->
@@ -41,10 +41,11 @@
             <h1 id="letterTitle">Generated Letter</h1>
         </header>
         <main class="letter-container">
-            <p class="letter-instructions">You must deliver this letter to your landlord using an approved method, such as by mail or in person. You can copy the letter and paste it into your notes or document app to print it.</p>
+            <p class="letter-instructions">You should deliver this letter to your landlord using an approved method, such as by mail or in person. You can copy the letter and paste it into your notes or document app to print it.</p>
             <div class="letter-actions">
                 <button class="action-button" id="editButton">Edit Answers</button>
                 <button class="action-button primary" id="copyButton">Copy to Clipboard</button>
+                <button class="action-button primary" id="emailButton">Send as Email</button>
             </div>
             <div class="letter-content" id="letterContent">
                 <!-- Rendered letter appears here -->
@@ -60,18 +61,6 @@
 
     <!-- Toast notification -->
     <div class="toast hidden" id="toast"></div>
-
-    <!-- Google Maps Places API -->
-    <script>
-        var googleMapsReady = false;
-        function onGoogleMapsLoaded() {
-            googleMapsReady = true;
-            if (typeof initAddressAutocomplete === 'function') {
-                initAddressAutocomplete();
-            }
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGS7v9fdetsSGQyjE4jHQ_6ykpH7JgwDo&libraries=places&callback=onGoogleMapsLoaded" async defer></script>
 
     <!-- CDN Scripts -->
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>

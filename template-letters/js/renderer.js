@@ -105,10 +105,13 @@ function renderLetter(template, data) {
     data.date = today.toLocaleDateString('en-CA', dateOptions);
 
     // Render with Nunjucks
-    const renderedMarkdown = nunjucksEnv.renderString(template, data);
+    let renderedMarkdown = nunjucksEnv.renderString(template, data);
 
-    // Convert markdown to HTML
-    const html = marked.parse(renderedMarkdown);
+    // Collapse multiple consecutive blank lines into one (but preserve &nbsp; lines)
+    renderedMarkdown = renderedMarkdown.replace(/\n(\s*\n){2,}/g, '\n\n');
+
+    // Convert markdown to HTML (breaks: true converts single newlines to <br>)
+    const html = marked.parse(renderedMarkdown, { breaks: true });
 
     // Also return plain text version (strip markdown syntax)
     const text = renderedMarkdown

@@ -19,66 +19,8 @@ const generateButton = document.getElementById('generateButton');
 const backButton = document.getElementById('backButton');
 const editButton = document.getElementById('editButton');
 const copyButton = document.getElementById('copyButton');
+const emailButton = document.getElementById('emailButton');
 const toast = document.getElementById('toast');
-
-// Address fields that need Google Places Autocomplete
-const addressFieldNames = [
-    'tenant_address_full',
-    'landlord_address_full',
-    'tenant_forwarding_address_full'
-];
-
-// Track autocomplete instances to prevent duplicates
-const autocompleteInstances = new Map();
-
-/**
- * Initialize Google Places Autocomplete on address fields
- */
-async function initAddressAutocomplete() {
-    // Wait for Google Maps API to load (googleMapsReady is set in index.html)
-    if (!window.googleMapsReady) {
-        return;
-    }
-
-    // Import the Places library for the new API
-    await google.maps.importLibrary('places');
-
-    addressFieldNames.forEach(fieldName => {
-        // SurveyJS wraps questions in divs with data-name attribute
-        const questionContainer = surveyElement.querySelector(`[data-name="${fieldName}"]`);
-        const input = questionContainer ? questionContainer.querySelector('input[type="text"]') : null;
-        if (!input || autocompleteInstances.has(input)) {
-            return;
-        }
-
-        // Create the new PlaceAutocompleteElement
-        const autocompleteEl = new google.maps.places.PlaceAutocompleteElement({
-            includedRegionCodes: ['ca'],
-            includedPrimaryTypes: ['street_address', 'subpremise', 'premise']
-        });
-
-        // Style the autocomplete element to match
-        autocompleteEl.style.width = '100%';
-        autocompleteEl.setAttribute('placeholder', 'Search for a Canadian address');
-
-        // Hide the original input and insert autocomplete element
-        input.style.display = 'none';
-        input.parentNode.insertBefore(autocompleteEl, input);
-
-        // When user selects a place, update the hidden input value
-        autocompleteEl.addEventListener('gmp-placeselect', async (event) => {
-            const place = event.place;
-            await place.fetchFields({ fields: ['formattedAddress'] });
-            if (place.formattedAddress) {
-                input.value = place.formattedAddress;
-                // Trigger SurveyJS to recognize the change
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-            }
-        });
-
-        autocompleteInstances.set(input, autocompleteEl);
-    });
-}
 
 /**
  * Initialize the application
@@ -108,6 +50,7 @@ function setupEventListeners() {
     backButton.addEventListener('click', handleBack);
     editButton.addEventListener('click', handleEdit);
     copyButton.addEventListener('click', handleCopy);
+    emailButton.addEventListener('click', handleEmail);
 
     // Handle browser back/forward
     window.addEventListener('popstate', () => {
@@ -228,14 +171,6 @@ function showSurveyView(template, formConfig) {
     setNumericInputModes();
     currentSurvey.onAfterRenderQuestion.add(setNumericInputModes);
 
-    // Initialize Google Places Autocomplete on address fields
-    initAddressAutocomplete();
-    currentSurvey.onAfterRenderQuestion.add((survey, options) => {
-        if (addressFieldNames.includes(options.question.name)) {
-            initAddressAutocomplete();
-        }
-    });
-
     // Show survey, hide others
     directoryView.classList.add('hidden');
     surveyView.classList.remove('hidden');
@@ -327,6 +262,17 @@ async function handleCopy() {
         console.error('Copy failed:', error);
         fallbackCopy(plainText);
     }
+}
+
+/**
+ * Handle email button click
+ */
+function handleEmail() {
+    const plainText = letterContent.dataset.plainText || letterContent.innerText;
+    const subject = encodeURIComponent(currentTemplate.name);
+    // Use %0D%0A for line breaks (CRLF) which works better with email clients like Gmail
+    const body = encodeURIComponent(plainText).replace(/%0A/g, '%0D%0A');
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
 /**

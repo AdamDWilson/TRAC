@@ -58,8 +58,8 @@
                     "name": "tenancy_end_date",
                     "type": "text",
                     "inputType": "date",
-                    "title": "Desired last day of tenancy",
-                    "description": "Must be at least 1 month from notice and the day before rent is due",
+                    "title": "When do you want your tenancy to end?",
+                    "description": "This date must be at least a month from when you give notice to your landlord and on the day before your rent is due.",
                     "isRequired": true
                 }
             ]
@@ -90,11 +90,16 @@
                     "visible": false
                 },
                 {
+                    "name": "manual_deposit_calculator_link",
+                    "type": "html",
+                    "html": "<p style=\"margin: 0 0 0.5rem; color: #666; font-size: 0.9rem;\">Your landlord will pay interest on your money they held as a security deposit.  Please use the <a href=\"https://www.housing.gov.bc.ca/rtb/WebTools/InterestOnDepositCalculator.html\" target=\"_blank\" rel=\"noopener\">Residential Tenancy Branch's Deposit Interest Calculator</a> to determine the return amount and enter it below.</p>",
+                    "visibleIf": "{has_security_deposit} = true and {deposit_calculation_supported} = false"
+                },
+                {
                     "name": "manual_deposit_return_amount",
                     "type": "text",
                     "inputType": "number",
                     "title": "Enter calculated return amount ($)",
-                    "description": "Your tenancy started before 2023. Please use the RTB calculator to determine the return amount: https://www.housing.gov.bc.ca/rtb/WebTools/InterestOnDepositCalculator.html",
                     "visibleIf": "{has_security_deposit} = true and {deposit_calculation_supported} = false",
                     "isRequired": true
                 }

@@ -2,9 +2,9 @@
 
 {{ tenant_name }}
 {{ tenant_address_full }}
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
 {{ landlord_name }}
 {{ landlord_address_full }}
 
@@ -13,7 +13,6 @@ Dear {{ landlord_name }},
 This letter serves as written notice to end my month-to-month tenancy at the address listed above. The last day of my tenancy will be {{ tenancy_end_date | formatDate }}.
 
 Section 45(1) of the Residential Tenancy Act (RTA) states:
-
 * A tenant may end a periodic tenancy by giving the landlord notice to end the tenancy effective on a date that
 * is not earlier than one month after the date the landlord receives the notice, and
 * is the day before the day in the month, or in the other period on which the tenancy is based, that rent is payable under the tenancy agreement.
@@ -35,7 +34,5 @@ If you wish to show my rental unit to prospective tenants before I move out, ple
 For additional information, please contact the RTB (gov.bc.ca/landlordtenant) at 604-660-1020 or 1-800-665-8779.
 
 Thank you,
-
-
 
 {{ tenant_name }}
