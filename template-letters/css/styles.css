@@ -385,8 +385,6 @@ gmp-place-autocomplete {
 @media (min-width: 1024px) {
     .header {
         padding: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
         border-bottom: none;
     }
 
