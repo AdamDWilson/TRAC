@@ -43,9 +43,29 @@ body {
 }
 
 .subtitle {
-    margin: 0.25rem 0 0;
+    margin: 0 0 0.75rem;
     color: #666;
     font-size: 0.9rem;
+}
+
+.survey-instructions {
+    margin: -0.25rem 0 0.5rem;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.template-doc-callout {
+    margin: 0 0 1.25rem;
+    font-size: 0.75rem;
+    color: #333;
+}
+
+.template-doc-callout a {
+    color: #333;
+}
+
+.template-doc-callout a:hover {
+    color: #0066cc;
 }
 
 .back-button {
@@ -100,17 +120,34 @@ body {
     font-size: 0.9rem;
 }
 
+#surveyView .header {
+    padding: 0.75rem 1rem;
+}
+
 /* Survey Container */
 .survey-container {
-    padding: 0.5rem;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 0.5rem 1rem;
 }
 
 /* SurveyJS Overrides for Mobile */
 .sd-root-modern {
     --sd-base-padding: 0.5rem;
     --sd-base-vertical-padding: 0.75rem;
+    --sd-page-vertical-padding: 0;
+}
+
+.sd-root-modern--full-container {
+    max-width: none !important;
+}
+
+.sd-body__page {
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+.sd-body {
+    max-width: none !important;
+    margin: 0 !important;
 }
 
 .sd-body.sd-body--static {

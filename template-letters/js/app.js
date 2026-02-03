@@ -13,6 +13,9 @@ const letterView = document.getElementById('letterView');
 const templateGrid = document.getElementById('templateGrid');
 const surveyElement = document.getElementById('surveyElement');
 const surveyTitle = document.getElementById('surveyTitle');
+const surveyDescription = document.getElementById('surveyDescription');
+const templateDocCallout = document.getElementById('templateDocCallout');
+const templateDocLink = document.getElementById('templateDocLink');
 const letterTitle = document.getElementById('letterTitle');
 const letterContent = document.getElementById('letterContent');
 const generateButton = document.getElementById('generateButton');
@@ -145,6 +148,15 @@ function showDirectoryView() {
  */
 function showSurveyView(template, formConfig) {
     surveyTitle.textContent = template.name;
+    surveyDescription.textContent = template.description;
+
+    // Show/hide Word template link
+    if (template.templateDocUrl) {
+        templateDocLink.href = template.templateDocUrl;
+        templateDocCallout.style.display = '';
+    } else {
+        templateDocCallout.style.display = 'none';
+    }
 
     // Only show back button if user navigated from directory
     backButton.style.display = navigatedFromDirectory ? '' : 'none';
