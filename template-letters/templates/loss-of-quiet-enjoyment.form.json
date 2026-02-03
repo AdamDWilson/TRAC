@@ -1,0 +1,64 @@
+{
+    "elements": [
+        {
+            "type": "panel",
+            "name": "tenantPanel",
+            "title": "Your Information",
+            "elements": [
+                {
+                    "name": "tenant_name",
+                    "type": "text",
+                    "title": "Your Full Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "tenant_address_full",
+                    "type": "comment",
+                    "title": "Rental Unit Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "landlordPanel",
+            "title": "Landlord Information",
+            "elements": [
+                {
+                    "name": "landlord_name",
+                    "type": "text",
+                    "title": "Landlord's Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "landlord_address_full",
+                    "type": "comment",
+                    "title": "Landlord's Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "issuePanel",
+            "title": "Quiet Enjoyment Violation",
+            "elements": [
+                {
+                    "name": "violation_description",
+                    "type": "comment",
+                    "title": "How is your right to quiet enjoyment being violated?",
+                    "description": "Describe the situation in detail, including dates and frequency if applicable",
+                    "rows": 6,
+                    "isRequired": true
+                }
+            ]
+        }
+    ],
+    "showNavigationButtons": "none",
+    "showQuestionNumbers": "off",
+    "completeText": "Generate Letter"
+}

@@ -32,9 +32,108 @@ template-letters/
 
 ## Adding New Templates
 
-1. Add entry to `templates/index.js` with id, name, description, index
-2. Create `templates/{id}.form.json` with SurveyJS form config
-3. Create `templates/{id}.letter.md` with Nunjucks template
+Each template requires **3 files** plus a registry entry:
+
+### 1. Register in `templates/index.js`
+
+```javascript
+{
+    id: "my-template-id",           // Used for filenames and URL routing
+    name: "Human Readable Name",    // Shown in template list
+    description: "Brief description shown on home page",
+    index: 2                        // Display order
+}
+```
+
+### 2. Create `templates/{id}.form.json` (SurveyJS config)
+
+Uses [SurveyJS](https://surveyjs.io/form-library/documentation/overview) format. Common patterns:
+
+```json
+{
+    "elements": [
+        {
+            "type": "panel",
+            "name": "panelName",
+            "title": "Section Title",
+            "elements": [
+                {
+                    "name": "field_name",
+                    "type": "text",
+                    "title": "Label shown to user",
+                    "description": "Help text below field",
+                    "isRequired": true
+                }
+            ]
+        }
+    ],
+    "showNavigationButtons": "none",
+    "showQuestionNumbers": "off"
+}
+```
+
+**Field types:**
+- `text` - Single line input. Add `"inputType": "date"` or `"inputType": "number"` for specialized inputs
+- `comment` - Multi-line textarea. Use `"rows": 3` to set height
+- `boolean` - Yes/no toggle
+- `radiogroup` - Single selection from `"choices": ["Option 1", "Option 2"]`
+- `expression` - Calculated field, use `"visible": false` to hide. Example: `"expression": "{field1} + {field2}"`
+- `html` - Static HTML content for instructions/links
+
+**Conditional visibility:** `"visibleIf": "{other_field} = true"` or `"visibleIf": "{field} = 'value'"`
+
+### 3. Create `templates/{id}.letter.md` (Nunjucks template)
+
+Uses [Nunjucks](https://mozilla.github.io/nunjucks/) templating with markdown formatting.
+
+**Available filters (defined in `js/renderer.js`):**
+- `{{ value | money }}` - Formats number as currency ($1,234.56)
+- `{{ date_field | formatDate }}` - Formats YYYY-MM-DD to "January 1, 2024"
+- `{{ deposit | depositInterest(start_date) }}` - Calculates deposit + compound interest
+
+**Template structure conventions:**
+```markdown
+{{ date }}
+
+{{ tenant_name }}
+{{ tenant_address_full }}
+&nbsp;
+&nbsp;
+&nbsp;
+{{ landlord_name }}
+{{ landlord_address_full }}
+
+Dear {{ landlord_name }},
+
+[Letter body with {{ variables }} and {{ calculated | money }} values]
+
+{% if conditional_field %}
+Conditional content here.
+{% endif %}
+
+For additional information, please contact the RTB (gov.bc.ca/landlordtenant) at 604-660-1020 or 1-800-665-8779.
+
+Thank you,
+
+{{ tenant_name }}
+```
+
+**Standard field names** (reuse where applicable):
+- `tenant_name`, `tenant_address_full`
+- `landlord_name`, `landlord_address_full`
+- `tenancy_start_date`, `tenancy_end_date`
+- `tenant_forwarding_address_full`, `tenant_forwarding_email`
+- `monthly_rent`, `deposit_amount`
+
+### 4. Create `templates/{id}.requirements.md` (optional)
+
+Human-readable instructions for AI assistants describing the form flow and validation logic. Not used by the app but helpful for maintenance.
+
+### Validation
+
+Run `python3 validate_templates.py` to check that:
+- All registered templates have required files
+- All variables in letter templates exist in form definitions
 
 ## TODO
 
