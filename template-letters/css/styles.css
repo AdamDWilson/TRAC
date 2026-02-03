@@ -84,6 +84,7 @@ body {
 
 /* Template Grid (Directory View) */
 .template-grid {
+    margin-top: 1rem;
     padding: 1rem;
     display: grid;
     gap: 1rem;
@@ -389,9 +390,7 @@ gmp-place-autocomplete {
     }
 
     .template-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem 2rem;
+        padding: 1.5rem 2rem 2rem;
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
     }
