@@ -115,6 +115,7 @@ function renderLetter(template, data) {
 
     // Also return plain text version (strip markdown syntax)
     const text = renderedMarkdown
+        .replace(/&nbsp;/g, '')           // HTML entities (used for spacing in HTML, blank in plain text)
         .replace(/\*\*(.*?)\*\*/g, '$1') // Bold
         .replace(/\*(.*?)\*/g, '$1')     // Italic
         .replace(/^#+\s*/gm, '')          // Headers

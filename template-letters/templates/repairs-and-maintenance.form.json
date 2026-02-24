@@ -1,0 +1,72 @@
+{
+    "elements": [
+        {
+            "type": "panel",
+            "name": "tenantPanel",
+            "title": "Your Information",
+            "elements": [
+                {
+                    "name": "tenant_name",
+                    "type": "text",
+                    "title": "Your Full Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "tenant_address_full",
+                    "type": "comment",
+                    "title": "Rental Unit Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "landlordPanel",
+            "title": "Landlord Information",
+            "elements": [
+                {
+                    "name": "landlord_name",
+                    "type": "text",
+                    "title": "Landlord's Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "landlord_address_full",
+                    "type": "comment",
+                    "title": "Landlord's Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "repairPanel",
+            "title": "Repair Request",
+            "elements": [
+                {
+                    "name": "repair_description",
+                    "type": "comment",
+                    "title": "What needs to be repaired?",
+                    "description": "Describe the repair(s) needed in detail",
+                    "rows": 6,
+                    "isRequired": true
+                },
+                {
+                    "name": "repair_deadline",
+                    "type": "text",
+                    "inputType": "date",
+                    "title": "Requested completion date",
+                    "description": "A reasonable date by which you'd like the repairs completed",
+                    "isRequired": true
+                }
+            ]
+        }
+    ],
+    "showNavigationButtons": "none",
+    "showQuestionNumbers": "off",
+    "completeText": "Generate Letter"
+}

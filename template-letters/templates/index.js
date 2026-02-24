@@ -19,6 +19,13 @@ const TEMPLATES = [
         description: "Notify your landlord that your right to quiet enjoyment under section 28 of the RTA is being violated.",
         templateDocUrl: "https://tenants.bc.ca/wp-content/uploads/2020/05/Loss-of-Quiet-Enjoyment.docx",
         index: 3
+    },
+    {
+        id: "repairs-and-maintenance",
+        name: "Repairs and Maintenance",
+        description: "Request repairs from your landlord under section 32 of the RTA, with a deadline and warning of dispute resolution.",
+        templateDocUrl: "https://tenants.bc.ca/wp-content/uploads/2020/05/Repairs-and-Maintenance.docx",
+        index: 4
     }
     // Add more templates here
 ];
