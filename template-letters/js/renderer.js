@@ -1,7 +1,7 @@
 // Nunjucks setup and custom filters
 
 // Configure Nunjucks environment
-const nunjucksEnv = nunjucks.configure({ autoescape: false });
+const nunjucksEnv = nunjucks.configure({ autoescape: true });
 
 // Interest rates by year for security deposit calculation
 const DEPOSIT_INTEREST_RATES = {
