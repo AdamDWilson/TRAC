@@ -48,13 +48,6 @@
             "title": "Tenancy Details",
             "elements": [
                 {
-                    "name": "tenancy_start_date",
-                    "type": "text",
-                    "inputType": "date",
-                    "title": "When did your tenancy begin?",
-                    "isRequired": true
-                },
-                {
                     "name": "tenancy_end_date",
                     "type": "text",
                     "inputType": "date",
@@ -74,6 +67,15 @@
                     "type": "boolean",
                     "title": "Did you pay a security deposit?",
                     "defaultValue": false
+                },
+                {
+                    "name": "tenancy_start_date",
+                    "type": "text",
+                    "inputType": "date",
+                    "title": "When did your tenancy begin?",
+                    "description": "This is used to calculate the interest owed on your security deposit.",
+                    "visibleIf": "{has_security_deposit} = true",
+                    "isRequired": true
                 },
                 {
                     "name": "deposit_amount",
