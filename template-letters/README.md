@@ -138,3 +138,4 @@ Run `python3 validate_templates.py` to check that:
 ## TODO
 
 - [ ] Fix tab order issue: when tabbing from deposit_amount field, focus jumps to browser address bar instead of the next visible field (deposit_return_method). May need JavaScript-based focus management for conditionally visible SurveyJS fields.
+- [ ] Reword the deposit return sentence in `notice-to-end-tenancy.letter.md` — currently reads awkwardly with "Total" mid-sentence. Consider restructuring to state the total amount clearly and itemize the original deposit and accrued interest separately for clarity.
