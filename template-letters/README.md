@@ -2,16 +2,7 @@
 
 A pure client-side webpage for generating template letters using SurveyJS for input collection and Nunjucks markdown templates.
 
-## Setup
-
-Requires a local server due to fetch() API restrictions:
-
-```bash
-cd template-letters
-python3 -m http.server 8000
-```
-
-Then open http://localhost:8000
+For local development setup, building, and deployment, see the [top-level README](../README.md).
 
 ## File Structure
 
@@ -131,9 +122,7 @@ Human-readable instructions for AI assistants describing the form flow and valid
 
 ### Validation
 
-Run `python3 validate_templates.py` to check that:
-- All registered templates have required files
-- All variables in letter templates exist in form definitions
+Run the validator (`python3 template-letters/validate_templates.py` from repo root — see top-level README) before opening a PR. It checks that all registered templates have required files and that every variable used in a letter is defined in the form. CI runs the same check.
 
 ## TODO
 
