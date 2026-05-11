@@ -1,0 +1,100 @@
+{
+    "elements": [
+        {
+            "type": "panel",
+            "name": "tenantPanel",
+            "title": "Your Information",
+            "elements": [
+                {
+                    "name": "tenant_name",
+                    "type": "text",
+                    "title": "Your Full Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "tenant_address_full",
+                    "type": "comment",
+                    "title": "Rental Unit Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "landlordPanel",
+            "title": "Landlord Information",
+            "elements": [
+                {
+                    "name": "landlord_name",
+                    "type": "text",
+                    "title": "Landlord's Name",
+                    "isRequired": true
+                },
+                {
+                    "name": "landlord_address_full",
+                    "type": "comment",
+                    "title": "Landlord's Address",
+                    "description": "Include street address, city, province, and postal code",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "tenancyPanel",
+            "title": "Move-Out Details",
+            "elements": [
+                {
+                    "name": "tenancy_end_date",
+                    "type": "text",
+                    "inputType": "date",
+                    "title": "Last day of your tenancy",
+                    "description": "This date must be at least 10 days from when you give this notice to your landlord and earlier than the effective date on the landlord's eviction notice.",
+                    "isRequired": true
+                },
+                {
+                    "name": "monthly_rent",
+                    "type": "text",
+                    "inputType": "number",
+                    "title": "Monthly rent amount ($)",
+                    "isRequired": true
+                },
+                {
+                    "name": "prorated_rent_refund",
+                    "type": "text",
+                    "inputType": "number",
+                    "title": "Prorated rent refund ($)",
+                    "description": "Amount your landlord owes for rent already paid for days after your move-out date. For example, if you paid $1500 for the month and are moving out on the 20th of a 30-day month, you would be owed $500 for the remaining 10 days.",
+                    "isRequired": true
+                },
+                {
+                    "name": "total_owed",
+                    "type": "expression",
+                    "expression": "{prorated_rent_refund} + {monthly_rent}",
+                    "visible": false
+                }
+            ]
+        },
+        {
+            "type": "panel",
+            "name": "forwardingPanel",
+            "title": "Forwarding Address",
+            "elements": [
+                {
+                    "name": "tenant_forwarding_address_full",
+                    "type": "comment",
+                    "title": "Forwarding Address",
+                    "description": "Where should your security deposit and/or pet damage deposit be mailed?",
+                    "rows": 3,
+                    "isRequired": true
+                }
+            ]
+        }
+    ],
+    "showNavigationButtons": "none",
+    "showQuestionNumbers": "off",
+    "completeText": "Generate Letter"
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Letters</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1F7QEYHBR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-D1F7QEYHBR');
+    </script>
+
+    <!-- SurveyJS CSS -->
+    <link href="https://unpkg.com/survey-core@2.5.12/survey-core.min.css" rel="stylesheet"
+          integrity="sha384-4zw2SyGy86wY7HqCmkLb5XyBzhjrMqpFtDsL/e8LgEvTd1/QPMv2bnbt0gJY2Kko"
+          crossorigin="anonymous">
+
+    <!-- Local styles -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Directory View -->
+    <div id="directoryView" class="view">
+        <header class="header">
+            <h1>Template Letter Generator Tool</h1>
+            <p class="subtitle">Communicate with your landlord about common situations.  Use this tool to generate a letter you can edit with details about your situation and send.</p>
+        </header>
+        <main class="template-grid" id="templateGrid">
+            <!-- Template cards populated by JS -->
+        </main>
+    </div>
+
+    <!-- Survey View -->
+    <div id="surveyView" class="view hidden">
+        <header class="header">
+            <button class="back-button" id="backButton">&larr; Back</button>
+            <h1 id="surveyTitle">Template</h1>
+        </header>
+        <main class="survey-container">
+            <p class="subtitle"><span id="surveyDescription"></span> Fill out the fields below. We will generate a letter you can modify and send to your landlord.</p>
+            <p class="tool-disclaimer">The content on TRAC's website is not legal advice. While these template letters are useful in many situations, it is up to you to decide whether it is appropriate to use them in your specific situation. The template letters will be generated using the information you provide. None of this information is collected or stored by TRAC; all information is processed solely on your device. It is up to you to make sure the information in the letter is accurate, and to make any edits you think are needed. While we do our best to update all of the information on our website and in these letters when changes to legislation, regulation, and policy occur, TRAC cannot guarantee all of our information is current and complete. Use these letters at your discretion, and consult a lawyer if you need legal advice.</p>
+            <p class="template-doc-callout" id="templateDocCallout">
+                Or <a id="templateDocLink" href="#" target="_blank" rel="noopener">download the Word template</a> instead.
+            </p>
+            <div id="surveyElement"></div>
+            <button class="generate-button" id="generateButton">Generate Letter</button>
+        </main>
+    </div>
+
+    <!-- Letter View -->
+    <div id="letterView" class="view hidden">
+        <header class="header">
+            <h1 id="letterTitle">Generated Letter</h1>
+        </header>
+        <main class="letter-container">
+            <p class="letter-instructions">You should deliver this letter to your landlord using an approved method, such as by mail or in person. You can copy the letter and paste it into your notes or document app to print it.</p>
+            <div class="letter-actions">
+                <button class="action-button" id="editButton">Edit Answers</button>
+                <button class="action-button primary" id="copyButton">Copy to Clipboard</button>
+                <button class="action-button primary" id="emailButton">Send as Email</button>
+            </div>
+            <div class="letter-content" id="letterContent">
+                <!-- Rendered letter appears here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <a href="https://tenants.bc.ca/disclaimer/" target="_blank" rel="noopener">Disclaimer</a>
+        <a href="https://tenants.bc.ca/Privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>
+    </footer>
+
+    <!-- Toast notification -->
+    <div class="toast hidden" id="toast"></div>
+
+    <!-- CDN Scripts -->
+    <script src="https://unpkg.com/survey-core@2.5.12/survey.core.min.js"
+            integrity="sha384-MeFns6pfXuyEJFfMyXS9YJiNqBmDNuzI7sLjhGE1LpbVlVTngOI2KRtVl8k+IYQQ"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/survey-js-ui@2.5.12/survey-js-ui.min.js"
+            integrity="sha384-k9COz9CS8sm0LCdKylB8cfcsrLVrwey9cV6YIS2GJnAuzm8/cYn9TPM3rgpGfcv6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"
+            integrity="sha384-ZNWDztJihcuTdvvOj/69bJWcalk3vWhHhurVe78xxAbMM8A8rmHY5+eTDWIjWC7Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"
+            integrity="sha384-948ahk4ZmxYVYOc+rxN1H2gM1EJ2Duhp7uHtZ4WSLkV4Vtx5MUqnV+l7u9B+jFv+"
+            crossorigin="anonymous"></script>
+
+    <!-- Local Scripts -->
+    <script src="templates/index.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
