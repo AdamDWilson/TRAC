@@ -48,20 +48,14 @@ body {
     font-size: 0.9rem;
 }
 
-.survey-instructions {
-    margin: -0.25rem 0 0.5rem;
-    color: #666;
-    font-size: 0.875rem;
-}
-
 .template-doc-callout {
     margin: 0 0 1.25rem;
-    font-size: 0.75rem;
-    color: #333;
+    font-size: 0.9rem;
+    color: #666;
 }
 
 .template-doc-callout a {
-    color: #333;
+    color: #666;
 }
 
 .template-doc-callout a:hover {
@@ -80,6 +74,18 @@ body {
 
 .back-button:hover {
     text-decoration: underline;
+}
+
+/* Tool Disclaimer (Survey View) */
+.tool-disclaimer {
+    margin: 0 0 0.75rem;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.tool-disclaimer strong {
+    color: #444;
 }
 
 /* Template Grid (Directory View) */
