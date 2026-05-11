@@ -154,22 +154,21 @@ def validate_variable_coverage(template_id):
 
 
 def check_requirements_timestamp(template_id):
-    """Check if requirements.md is newer than form.json."""
-    errors = []
+    """Warn (don't error) if requirements.md mtime is newer than form.json.
 
+    Filesystem mtimes aren't preserved by git, so this check is only meaningful
+    on a dev machine where mtimes reflect actual edit history. In CI/fresh
+    clones it's non-deterministic, so we only emit a warning. The substantive
+    check is validate_variable_coverage().
+    """
     req_path = TEMPLATES_DIR / f"{template_id}.requirements.md"
     form_path = TEMPLATES_DIR / f"{template_id}.form.json"
 
     if not req_path.exists() or not form_path.exists():
-        return errors
+        return
 
-    req_mtime = req_path.stat().st_mtime
-    form_mtime = form_path.stat().st_mtime
-
-    if req_mtime > form_mtime:
-        errors.append(f"Template '{template_id}': requirements.md is newer than form.json (regenerate form?)")
-
-    return errors
+    if req_path.stat().st_mtime > form_path.stat().st_mtime:
+        print(f"Warning: Template '{template_id}': requirements.md is newer than form.json (regenerate form?)")
 
 
 def main():
@@ -199,8 +198,8 @@ def main():
         # Validate variable coverage
         errors.extend(validate_variable_coverage(template_id))
 
-        # Check requirements timestamp
-        errors.extend(check_requirements_timestamp(template_id))
+        # Warn (does not fail) if requirements.md is newer than form.json
+        check_requirements_timestamp(template_id)
 
     # Print errors
     for error in errors:
